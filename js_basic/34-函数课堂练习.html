@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 写一个打招呼的函数hi~
+    // function sayHi() {
+    //   console.log("hi~");
+    // }
+    // sayHi()
+    // 把99乘法表封装到函数里面，重复调用3次
+    function nine() {
+      // 打印九九乘法表
+      for (let i = 1; i <= 9; i++) {
+        for (let j = 1; j <= i; j++) {
+          document.write(`${j}*${i}=${j * i}\n`)
+        }
+        document.write("<br>")
+      }
+    }
+    nine()
+    nine()
+    nine()
+  </script>
+</body>
+
+</html>

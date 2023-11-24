@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    button {
+      margin: auto 5px;
+    }
+
+    .bgColor {
+      background-color: pink;
+    }
+  </style>
+</head>
+
+<body>
+  <button class="bgColor">按钮</button>
+  <button>按钮</button>
+  <button>按钮</button>
+  <button>按钮</button>
+</body>
+<script>
+  // 1. 获取所有按钮元素
+  var buttons = document.querySelectorAll("button");
+  // btns得到的是伪数组  里面的每一个元素 btns[i]
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].onclick = function () {
+      document.querySelector(".bgColor").className = ""
+      this.className = "bgColor"
+    }
+  }
+</script>
+
+</html>

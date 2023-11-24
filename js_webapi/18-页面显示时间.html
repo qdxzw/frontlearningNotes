@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>当前时间:<span></span></h1>
+  <script>
+    let getDate = function () {
+      // 1.实例化时间
+      const date = new Date()
+      // 2.补零
+      // 月份补零
+      const month = date.getMonth() + 1 < 10 ? date.getMonth() + 1 + '0' : date.getMonth() + 1
+      // 日期补零
+      const dates = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+      // 小时补零
+      const hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours()
+      // 分钟补零
+      const minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
+      // 秒补零
+      const seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
+      return `${date.getFullYear()}-${month}-${dates} ${hours}:${minutes}:${seconds}`
+    }
+    // 3.获取元素, 并进行填充
+    const span = document.querySelector("span")
+    span.innerHTML = getDate()
+    setInterval(function () { span.innerHTML = getDate() }, 1000)
+  </script>
+</body>
+
+</html>

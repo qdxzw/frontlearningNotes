@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .countdown {
+      margin: 200px auto;
+      width: 240px;
+      height: 305px;
+      text-align: center;
+      line-height: 1;
+      color: #fff;
+      background-color: #9d2b2a;
+      /* background-size: 240px; */
+      /* float: left; */
+      overflow: hidden;
+    }
+
+    .countdown .next {
+      font-size: 16px;
+      margin: 25px 0 14px;
+    }
+
+    .countdown .title {
+      font-size: 33px;
+    }
+
+    .countdown .tips {
+      margin-top: 80px;
+      font-size: 23px;
+    }
+
+    .countdown small {
+      font-size: 17px;
+    }
+
+    .countdown .clock {
+      width: 142px;
+      margin: 18px auto 0;
+      overflow: hidden;
+    }
+
+    .countdown .clock span,
+    .countdown .clock i {
+      display: block;
+      text-align: center;
+      line-height: 34px;
+      font-size: 23px;
+      float: left;
+    }
+
+    .countdown .clock span {
+      width: 34px;
+      height: 34px;
+      border-radius: 2px;
+      background-color: #303430;
+    }
+
+    .countdown .clock i {
+      width: 20px;
+      font-style: normal;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="countdown">
+    <p class="next">今天是2222年2月22日</p>
+    <p class="title">下班倒计时</p>
+    <p class="clock">
+      <span id="hour">00</span>
+      <i>:</i>
+      <span id="minutes">25</span>
+      <i>:</i>
+      <span id="scond">20</span>
+    </p>
+    <p class="tips">18:30:00下课</p>
+  </div>
+  <script>
+    const countdown = document.querySelector(".countdown")
+    function getRandomColor(flag) {
+      if (flag) {
+        // 如果参数传递的是true或者无参数，则输出一个随机十六进制的颜色
+        let str = "#"
+        let arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
+        for (let i = 0; i < 6; i++) {
+          str = str + arr[Math.floor(Math.random() * arr.length)]
+        }
+        return str
+      } else {
+        // 如果参数传递的是false,则输出一个随机rgb的颜色 
+        let random_r = Math.floor(Math.random() * 256)
+        let random_b = Math.floor(Math.random() * 256)
+        let random_g = Math.floor(Math.random() * 256)
+        return `rgb(${random_r},${random_b},${random_g})`
+      }
+    }
+    countdown.style.backgroundColor = getRandomColor(true)
+    // 1.获取元素
+    const next = document.querySelector(".next")
+    const hour = document.querySelector("#hour")
+    const minutes = document.querySelector("#minutes")
+    const second = document.querySelector("#scond")
+    // 2.通过日期实例化对上面的标题时间进行修改
+    let date = new Date()
+    let year = date.getFullYear()
+    let month = date.getMonth() + 1
+    let day = date.getDate()
+    next.innerHTML = `今天是${year}年${month}月${day}日`
+    // 3.根据时间戳获取倒计时
+    let getCountDown = function () {
+      // 3.1获取现在的时间戳
+      let oldDate = +new Date()
+      // 3.2获取未来的时间戳
+      let newDate = +new Date(2023, 11, 23, 18, 30, 0)
+      let total = (newDate - oldDate) / 1000
+      d = parseInt(total / 60 / 60 / 24)//计算天数
+      h = parseInt(total / 60 / 60 % 24)//计算小时
+      m = parseInt(total / 60 % 60)//计算分数
+      s = parseInt(total % 60)//计算当前秒数
+      hour.innerHTML = h < 10 ? '0' + h : h
+      minutes.innerHTML = m < 10 ? '0' + m : m
+      second.innerHTML = s < 10 ? '0' + s : s
+    }
+    getCountDown()
+    setInterval(getCountDown, 1000)
+  </script>
+</body>
+
+</html>

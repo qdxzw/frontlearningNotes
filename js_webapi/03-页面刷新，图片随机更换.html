@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <img src="./images/1.webp" alt="">
+  <script>
+    //页面刷新，图片随机更换
+    let random = Math.floor(Math.random() * 6 + 1)
+    // 2.获取元素
+    const img = document.querySelector("img")
+    console.dir(img);
+    img.src = `./images/${random}.webp`
+  </script>
+</body>
+
+</html>

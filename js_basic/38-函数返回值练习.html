@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 1.求任意2个数中的最大值，并返回
+    // let getBig = function (num1, num2) {
+    //   return num1 > num2 ? num1 : num2
+    // }
+    // console.log(getBig(7, 3));
+    // 2.求任意数组中的最大值并返回这个最大值
+    // function getBigArray(arry = []) {
+    //   let max = arry[0]
+    //   for (let i = 0; i < arry.length; i++) {
+    //     if (max < arry[i]) {
+    //       max = arry[i]
+    //     }
+    //   }
+    //   return max
+    // }
+    // console.log(getBigArray([2, 3, 1, 5, 4]));
+    // 3.求任意数组中的最小值并返回这个最小值
+    function getMinArray(arry = []) {
+      let min = arry[0]
+      for (let i = 0; i < arry.length; i++) {
+        if (min > arry[i]) {
+          min = arry[i]
+        }
+      }
+      return min
+    }
+    console.log(getMinArray([2, 3, 1, 5, 4]));
+  </script>
+</body>
+
+</html>

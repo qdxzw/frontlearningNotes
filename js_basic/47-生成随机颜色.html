@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function getRandomColor(flag) {
+      if (flag) {
+        // 如果参数传递的是true或者无参数，则输出一个随机十六进制的颜色
+        let str = "#"
+        let arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
+        for (let i = 0; i < 6; i++) {
+          str = str + arr[Math.floor(Math.random() * arr.length)]
+        }
+
+        console.log(str);
+      } else {
+        // 如果参数传递的是false,则输出一个随机rgb的颜色 
+        let random_r = Math.floor(Math.random() * 256)
+        let random_b = Math.floor(Math.random() * 256)
+        let random_g = Math.floor(Math.random() * 256)
+        console.log(`rgb(${random_r},${random_b},${random_g})`);
+      }
+    }
+    getRandomColor(false)
+    getRandomColor(true)
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 100px auto;
+      text-align: center;
+      line-height: 200px;
+      background-color: aliceblue;
+    }
+
+    button {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <button>x</button>
+    广告
+  </div>
+  <script>
+    // 京东点击关闭顶部广告
+    // 1.获取元素
+    const btn = document.querySelector("button")
+    const box = document.querySelector(".box")
+    // 2.绑定点击事件
+    btn.addEventListener("click", function () {
+      box.style.display = "none"
+    })
+  </script>
+</body>
+
+</html>
