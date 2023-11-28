@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <a href="http://attackingbear.top">http://attackingbear.top5秒自动进行跳转</a>
+  <script>
+    // 获取元素
+    const a = document.querySelector("a")
+    let time = 5
+    // 定义间歇定时器
+    let timeId = setInterval(function () {
+      time--
+      a.innerHTML = `http://attackingbear.top${time}秒自动进行跳转`
+      // 如果时间为0，停止定时器并进行跳转
+      if (time === 0) {
+        clearInterval(timeId)
+        location.href = "http://attackingbear.top"
+      }
+    }, 1000)
+  </script>
+</body>
+
+</html>
