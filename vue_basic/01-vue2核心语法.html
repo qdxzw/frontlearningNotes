@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 1.2插值语法 -->
+    <!-- <p>{{content}}</p>
+    <p>{{1>2?"对":"错"}}</p>
+    <p>{{contents()}}</p>
+    <p>{{contents()}}</p>
+    <p>{{contents()}}</p>
+    <p>{{contentComputed}}</p>
+    <p>{{contentComputed}}</p>
+    <p>{{contentComputed}}</p> -->
+    <!-- 5.指令 -->
+    <!-- 5.1内容指令 -->
+    <!-- <p v-text="htmlContent">123</p>
+    <p v-html="htmlContent">123</p> -->
+
+    <!-- 5.2渲染指令 -->
+    <!-- <p v-for="(item,key,index) in obj">{{item}}{{key}}{{index}}</p> -->
+    <!-- if会销毁DOM,show是隐藏DOM -->
+    <!-- <p v-if="false">这是指令</p>
+    <p v-show="false">这是指令</p> -->
+
+    <!-- 5.3属性指令 -->
+    <!-- v-bind简写为: -->
+    <!-- <p v-bind:title="content">这是内容</p>
+    <p :title="content">这是内容</p> -->
+
+    <!-- 5.4事件指令 -->
+    <!-- v-on:简写为@ -->
+    <!-- <button v-on:click="contents">按钮</button>
+    <button @click="contents">按钮</button> -->
+
+    <!-- 5.5表单指令 -->
+    <!-- v-model可以实现双向数据绑定 -->
+    <!-- <input type="text" v-model="inputValue">
+    <p>{{inputValue}}</p> -->
+
+    <!-- 6.修饰符 -->
+    <!-- <input type="text" v-model.trim="inputValue"> -->
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      // 1.响应数据与插值语法
+      data() {
+        return {
+          content: "内容",
+          htmlContent: "<span>213</span>",
+          obj: { a: 10, b: 20, c: 30 },
+          inputValue: "默认内容"
+        }
+      },
+      // 2.方法属性
+      methods: {
+        contents() {
+          console.log("methods");
+          return this.content + "（methods）"
+        }
+      },
+      // 3.计算属性
+      // 具有缓存性
+      computed: {
+        contentComputed() {
+          console.log("computed");
+          return this.content + "（计算属性）"
+        }
+      },
+      // 4.侦听器
+      // 修改响应数据，页面会进行更新（Vue内部自动实现），
+      // 如果需要在更新某个特定数据之后做一些操作,可以通过侦听器进行监听然后进行操作
+      watch: {
+        content(newValue, oldValue) {
+          console.log(newValue, oldValue)
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
