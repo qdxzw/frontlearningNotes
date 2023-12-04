@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>利用节流来处理-鼠标滑过盒子显示文字（手写节流函数）</title>
+    <style>
+      div {
+        margin: auto;
+        width: 200px;
+        height: 200px;
+        text-align: center;
+        background-color: antiquewhite;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h2>0</h2>
+    </div>
+    <script src="./js/lodash.min.js"></script>
+    <script>
+      // 鼠标在盒子上移动，里面的数字就会变化加1
+      // 1.获取元素
+      const div = document.querySelector('div')
+      const h2 = document.querySelector('h2')
+      let i = 1
+      function mouseMove() {
+        h2.innerHTML = i++
+      }
+      div.addEventListener('mousemove', throttle(mouseMove, 500))
+      // 核心思路
+      // 1.声明一个定时器变量
+      // 2.当鼠标滑过都先判断有没有定时器,如果有定时器则不开启新的定时器
+      // 3.如果没有定时器则开启定时器,并存在定时器变量里面
+      // 4.定时器里面要调用执行的函数,定时器里面要把定时器清空()
+      // 绑定鼠标移动事件
+      function throttle(fn, time) {
+        let timeId = null
+        return function () {
+          if (!timeId) {
+            timeId = setTimeout(function () {
+              fn()
+              timeId = null
+            }, time)
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>利用防抖来处理-鼠标滑过盒子显示文字(手写防抖函数)</title>
+    <style>
+      div {
+        margin: auto;
+        width: 200px;
+        height: 200px;
+        text-align: center;
+        background-color: antiquewhite;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h2>0</h2>
+    </div>
+    <script src="./js/lodash.min.js"></script>
+    <script>
+      // 鼠标在盒子上移动，里面的数字就会变化加1
+      // 1.获取元素
+      const div = document.querySelector('div')
+      const h2 = document.querySelector('h2')
+      // 2.定义鼠标移动函数
+      let i = 1
+      function mousemove() {
+        h2.innerHTML = i++
+      }
+      // 手写防抖函数,核心是利用setTimeout定时器来实现
+      // 1.声明一个定时器变量
+      // 2.每次鼠标移动(事件触发)的时候都要先判断是否有定时器,如果有的话先清除之前的定时器
+      // 3.如果没有定时器,则开启定时器,存入到定时器变量里面
+      // 4.定时器里面写函数调用
+      div.addEventListener('mousemove', debounce(mousemove, 500))
+      function debounce(fn, t) {
+        let timeId
+        // return 返回一个匿名函数
+        return function () {
+          //2.3.4
+          if (timeId) clearTimeout(timeId)
+          timeId = setTimeout(function () {
+            fn()
+          }, t)
+        }
+      }
+    </script>
+  </body>
+</html>

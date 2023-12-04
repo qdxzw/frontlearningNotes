@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>利用防抖来处理-鼠标滑过盒子显示文字(lodash)</title>
+    <style>
+      div {
+        margin: auto;
+        width: 200px;
+        height: 200px;
+        text-align: center;
+        background-color: antiquewhite;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h2>0</h2>
+    </div>
+    <script src="./js/lodash.min.js"></script>
+    <script>
+      // 鼠标在盒子上移动，里面的数字就会变化加1
+      // 1.获取元素
+      const div = document.querySelector('div')
+      const h2 = document.querySelector('h2')
+      // 2.绑定鼠标移动事件
+      let i = 1
+      div.addEventListener(
+        'mousemove',
+        _.debounce(function () {
+          h2.innerHTML = i++
+        }, 500)
+      )
+    </script>
+  </body>
+</html>
