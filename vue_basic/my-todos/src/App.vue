@@ -1,17 +1,110 @@
 <script>
+
 export default {
   data () {
     return {
-      todos: [
-        {
-          id: 1,
-          title: '测试1',
-          completed: true
-        },
-        { id: 2, title: '测试2', completed: false }
-      ]
+      todos: JSON.parse(localStorage.getItem("todos"))||[],
+      editingIndex:-1,//当前编辑元素的索引
+      editingValue:"",//当前编辑元素的值
+      visibility:"all",
     }
-  }
+  },
+  methods:{
+    // 全选或着全不选
+    toggleAll(e){
+      this.todos.forEach(item=>{
+        item.completed=e.target.checked
+      })
+    },
+    // 增加todo
+    addTodo(e){
+      // 判断增加的值是否为空，如果不为空则添加到数组里面并展示到页面上
+      if(e.target.value.trim()!=""){
+        this.todos.push({
+        id: Date.now(),
+        title: e.target.value.trim(),
+        completed: false
+      })
+      }
+      localStorage.setItem("todos",JSON.stringify(this.todos))
+      console.log(JSON.parse(localStorage.getItem("todos")));
+      this.todos=JSON.parse(localStorage.getItem("todos"))
+      // 回车之后，清空输入框中的数据
+      e.target.value=""
+    },
+    // 删除todo
+    deleteTodo(todo){
+      // indexOf() 方法用于在字符串中查找指定的文本，并返回其首次出现的位置。
+      // 如果找不到指定的文本，则返回-1
+      this.todos.splice(this.todos.indexOf(todo),1);
+      localStorage.setItem("todos",JSON.stringify(this.todos))
+    },
+    // 编辑todo
+    editTodo(index){
+      this.editingIndex=index
+      this.editingValue=this.todos[index].title
+      // console.log(this.editingIndex)
+      // console.log(this.editingValue)
+    },
+    // 编辑_保存
+    saveItem(){
+      this.todos[this.editingIndex].title=this.editingValue
+      localStorage.setItem("todos",JSON.stringify(this.todos))
+      this.editingIndex=-1
+      this.editingValue=""
+    },
+    // 编辑_取消
+    cancelEdit(){
+      this.editingIndex=-1
+      this.editingValue=""
+    },
+    // 根据hash值来显示对应的列表
+    onHashChange(){
+      const hash=location.hash.replace(/#\/?/,"")
+      if(["all","active","completed"].includes(hash)){
+          this.visibility=hash
+      }else{
+        location.hash=''
+        this.visibility="all"
+      }
+    },
+    // 清除已经完成的事项
+    clearCompleted(){
+      this.todos= this.todos.filter(todo=>!todo.completed)
+      localStorage.setItem("todos",JSON.stringify(this.todos))
+    },
+  },computed:{
+    filteredTodos(){
+      switch(this.visibility){
+        case "all":{
+          return this.todos
+        }
+        case "active":{
+          return this.todos.filter(todo=>!todo.completed)
+        }
+        case "completed":{
+          return this.todos.filter(todo=>todo.completed)
+        }
+      }
+}
+  },
+  mounted(){
+// hashchange事件，顾名思义，就是hash改变时触发的事件。
+// window.location.hash值的变化会直接反应到浏览器地址栏（#后面的部分会发生变化），
+// 同时，浏览器地址栏hash值的变化也会触发window.location.hash值的变化，
+// 从而触发onhashchange事件。
+    window.addEventListener("hashchange",this.onHashChange)
+    this.onHashChange()
+  },
+  // 如果想注册局部指令，组件中也接受一个 directives 的选项
+  directives: {
+    // Todo之自定义指令实现自动聚焦
+      focus: {
+        inserted: function (el) {
+          el.focus()
+        }
+      }
+    }
 }
 </script>
 
@@ -19,56 +112,56 @@ export default {
   <section class="todoapp">
     <header class="header">
       <h1>todos</h1>
-      <input class="new-todo" placeholder="What needs to be done?" autofocus />
+      <input  class="new-todo" @keydown.enter="addTodo" placeholder="What needs to be done?" autofocus />
     </header>
     <!-- This section should be hidden by default and shown when there are todos -->
     <section class="main">
-      <input id="toggle-all" class="toggle-all" type="checkbox" />
+      <input id="toggle-all" class="toggle-all" type="checkbox" @click="toggleAll" />
       <label for="toggle-all">Mark all as complete</label>
       <ul class="todo-list">
         <!-- These are here just to show the structure of the list items -->
         <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
-        <li class="completed">
+       <!-- 遍历数据 -->
+        <li v-for="todo,index in filteredTodos" :key="todo.id" :class="{completed:todo.completed}"  @dblclick="editTodo(index)">
           <div class="view">
-            <input class="toggle" type="checkbox" checked />
-            <label>Taste JavaScript</label>
-            <button class="destroy"></button>
+            <input class="toggle" type="checkbox" v-model="todo.completed" />
+            <!-- 展示内容 -->
+            <label v-if="index!=editingIndex">{{ todo.title }}</label>
+            <div v-else style="text-align: center;" >
+              <!-- Todo之自定义指令实现自动聚焦 -->
+              <input type="text" v-model="editingValue" v-focus="true" >
+              <button @click="saveItem">保存</button>
+              <button @click="cancelEdit">取消</button>
+            </div>
+            <button class="destroy" @click="deleteTodo(todo)"></button>
           </div>
           <input class="edit" value="Create a TodoMVC template" />
-        </li>
-        <li>
-          <div class="view">
-            <input class="toggle" type="checkbox" />
-            <label>Buy a unicorn</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Rule the web" />
         </li>
       </ul>
     </section>
     <!-- This footer should be hidden by default and shown when there are todos -->
-    <footer class="footer">
+    <footer class="footer" v-show="this.todos.length">
       <!-- This should be `0 items left` by default -->
-      <span class="todo-count"><strong>0</strong> item left</span>
+      <span class="todo-count"><strong>{{(this.todos.filter(todo=>!todo.completed)).length}}</strong> <span>{{(this.todos.filter(todo=>!todo.completed)).length>1? "items left":"item left"}}</span></span>
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
         <li>
-          <a class="selected" href="#/">All</a>
+          <a :class="{selected:visibility=='all'}" href="#/all">All</a>
         </li>
         <li>
-          <a href="#/active">Active</a>
+          <a :class="{selected:visibility=='active'}" href="#/active">Active</a>
         </li>
         <li>
-          <a href="#/completed">Completed</a>
+          <a :class="{selected:visibility=='completed'}" href="#/completed">Completed</a>
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->
-      <button class="clear-completed">Clear completed</button>
+      <button class="clear-completed" @click="clearCompleted">Clear completed</button>
     </footer>
   </section>
 </template>
 
-<style scoped>
+<!-- <style scoped> -->
 html,
 body {
   margin: 0;
@@ -457,4 +550,8 @@ html .clear-completed:active {
   box-shadow: 0 0 2px 2px #cf7d7d;
   outline: 0;
 }
+</style>
+
+<style>
+@import 'https://unpkg.com/todomvc-app-css@2.4.1/index.css';
 </style>
