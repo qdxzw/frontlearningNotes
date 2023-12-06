@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>过滤敏感词</title>
+  </head>
+  <body>
+    <textarea cols="30" rows="10"></textarea>
+    <button>发布</button>
+    <div></div>
+    <script>
+      const textarea = document.querySelector('textarea')
+      const button = document.querySelector('button')
+      const div = document.querySelector('div')
+      button.addEventListener('click', function () {
+        let filterStr = textarea.value.replace(/激情|基情/g, '**')
+        div.innerHTML = filterStr
+        textarea.value = ''
+      })
+    </script>
+  </body>
+</html>

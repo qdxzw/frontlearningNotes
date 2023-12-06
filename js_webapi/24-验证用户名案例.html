@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用户名验证</title>
+    <style>
+      span {
+        display: inline-block;
+        width: 250px;
+        height: 30px;
+        vertical-align: middle;
+        line-height: 30px;
+        padding-left: 15px;
+      }
+
+      .error {
+        color: red;
+        background: url(./images/error1.png) no-repeat left center;
+      }
+
+      .right {
+        color: green;
+        background: url(./images/right.png) no-repeat left center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <input type="text" />
+    <span></span>
+    <script>
+      //   获取元素
+      const input = document.querySelector('input')
+      const span = document.querySelector('span')
+      //   给input表单绑定失去焦点事件
+      input.addEventListener('blur', function () {
+        // 定义正则规则(Regular Expression)
+        const reg = /^[a-zA-Z0-9-_]{6,16}$/
+        let flag = reg.test(this.value)
+        // 如果符合正则规范，则让后面的span标签添加right类
+        // 如果不符合正则规范，则让后面的span标签添加wrong类
+        if (flag) {
+          span.classList.add('right')
+          span.classList.remove('error')
+          span.innerHTML = '输入成功'
+        } else {
+          span.classList.add('error')
+          span.classList.remove('right')
+          span.innerHTML = '不符合正则规范,请重新输入'
+        }
+      })
+    </script>
+  </body>
+</html>
