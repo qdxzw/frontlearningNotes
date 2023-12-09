@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>写一个求和函数-箭头函数版</title>
+  </head>
+  <body>
+    <script>
+      const getSum = (...arry) => {
+        // 剩余参数（真数组）
+        console.log(...arry)
+        let sum = 0
+        for (let i = 0; i < arry.length; i++) {
+          sum = sum + arry[i]
+        }
+        console.log(sum)
+      }
+      getSum(1, 2, 3, 4)
+    </script>
+  </body>
+</html>
