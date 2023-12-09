@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>独立完成数组解构赋值</title>
+  </head>
+  <body>
+    <script>
+      // 需求1：数组解构
+      const pc = ['海尔', '联想', '小米', '方正']
+      const [hr, lx, xm, fz] = pc
+      console.log(hr)
+      console.log(lx)
+      console.log(xm)
+      console.log(fz)
+      // 需求2：函数返回值解构
+      function getValue() {
+        return [100, 60]
+      }
+      const [max, min] = getValue()
+      console.log(max)
+      console.log(min)
+    </script>
+  </body>
+</html>
