@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>独立完成对象解构赋值</title>
+  </head>
+  <body>
+    <script>
+      // 需求1 对象解构，并打印
+      const pig = { name: '佩奇', age: 6 }
+      const { name, age } = pig
+      console.log(name)
+      console.log(age)
+      // 需求2 name变成uname,并打印输出d:\studydata\资料\资料\JavaScript进阶第一天\06-素材\综合案例-价格筛选.html d:\studydata\资料\资料\JavaScript进阶第一天\06-素材\渲染商品案例.html
+      const { name: uname } = pig
+      console.log(uname)
+      // 需求3 请将数组对象完成解雇
+      const goods = [
+        {
+          goodsName: '小米',
+          price: 1999
+        }
+      ]
+      const [{ goodsName, price }] = goods
+      console.log(goodsName)
+      console.log(price)
+    </script>
+  </body>
+</html>
