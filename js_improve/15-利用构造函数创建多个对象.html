@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>利用构造函数创建多个对象</title>
+  </head>
+  <body>
+    <script>
+      function Goods(name, price, count) {
+        this.name = name
+        this.price = price
+        this.count = count
+      }
+      console.log(new Goods('小米', 1999, 20))
+      console.log(new Goods('华为', 3999, 59))
+      console.log(new Goods('vivo', 1888, 100))
+    </script>
+  </body>
+</html>

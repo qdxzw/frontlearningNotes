@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>计算薪资</title>
+  </head>
+  <body>
+    <script>
+      const arr = [
+        {
+          name: '张三',
+          salary: 10000
+        },
+        {
+          name: '李四',
+          salary: 10000
+        },
+        {
+          name: '王五',
+          salary: 20000
+        }
+      ]
+      console.log(arr.reduce((pre, current) => pre + current.salary, 0))
+    </script>
+  </body>
+</html>
