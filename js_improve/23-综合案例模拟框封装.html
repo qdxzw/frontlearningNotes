@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>模拟框封装</title>
+    <style>
+      .modal {
+        margin: 200px auto;
+        width: 210px;
+        height: 100px;
+        text-align: center;
+        background-color: pink;
+      }
+      h3 span:nth-child(1) {
+        padding-right: 110px;
+      }
+      h3 span:nth-child(2) {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="del">删除</button>
+    <button class="login">登录</button>
+    <script>
+      // 定义构造函数
+      function Modal(title = '', msg = '') {
+        this.modal = document.createElement('div')
+        this.modal.classList.add('modal')
+        this.modal.innerHTML = `
+        <h3><span>${title}</span><span class="close">x</span></h3>
+      <p>${msg}</p>
+        `
+      }
+      new Modal('adwa', 'xx')
+      // // 关闭方法
+      Modal.prototype.close = function () {
+        document.body.removeChild(this.modal)
+      }
+      // // 添加方法
+      Modal.prototype.open = function () {
+        // 判断页面有没有modal盒子
+        const box = document.querySelector('.modal')
+        // 如果有先删除之前的模拟框，没有则进行添加
+        box && box.remove()
+        document.body.appendChild(this.modal)
+        // 模拟框要先渲染到页面上，再进行删除事件的绑定
+        this.modal.querySelector('.close').addEventListener('click', () => {
+          //  使用箭头函数，this指向当前的实例对象
+          this.close()
+        })
+      }
+
+      document.querySelector('.del').addEventListener('click', function () {
+        const del = new Modal('温馨提示', '你没有删除的权限')
+        del.open()
+      })
+      document.querySelector('.login').addEventListener('click', function () {
+        const login = new Modal('友情提示', '请先登录')
+        login.open()
+      })
+    </script>
+  </body>
+</html>

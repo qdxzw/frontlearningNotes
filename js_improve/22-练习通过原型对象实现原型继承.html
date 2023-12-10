@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>练习通过原型对象实现原型继承</title>
+  </head>
+  <body>
+    <script>
+      // 父类
+      function People() {
+        this.head = 1
+        this.eyes = 2
+      }
+      // 子类
+      function Women() {}
+      function Man() {}
+      // 子类继承父类
+      Women.prototype = new People()
+      Man.prototype = new People()
+      // 子类重新指向自己的构造函数
+      Women.prototype.constructor = Women
+      Man.prototype.constructor = Man
+      Women.prototype.baby = function () {
+        console.log('宝宝')
+      }
+      const red = new Women()
+      console.log(red)
+      const pink = new Man()
+      console.log(pink)
+    </script>
+  </body>
+</html>

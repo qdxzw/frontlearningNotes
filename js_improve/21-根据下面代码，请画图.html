@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>根据下面代码，请画图</title>
+  </head>
+  <body>
+    <script>
+      function Person() {
+        this.name = name
+      }
+      const peppa = new Person('佩奇')
+      // 1.验证原型对象的constructor指向构造函数
+      console.log(Person.prototype.constructor === Person) //true
+      // 2.验证对象原型的__proto__.constructor指向构造函数
+      console.log(peppa.__proto__.constructor === Person) //true
+      // 3.验证对象原型的__proto__指向原型对象
+      console.log(peppa.__proto__ === Person.prototype) //true
+    </script>
+  </body>
+</html>

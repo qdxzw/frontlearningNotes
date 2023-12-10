@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>给数组扩展方法</title>
+  </head>
+  <body>
+    <script>
+      const arr = [1, 2, 3]
+      // 给数组扩展最大值方法
+      Array.prototype.max = function () {
+        return Math.max(...this)
+      }
+      // 给数组扩展求和方法
+      Array.prototype.sum = function () {
+        return this.reduce((pre, current) => pre + current, 0)
+      }
+      console.log(arr.max())
+      console.log(arr.sum())
+    </script>
+  </body>
+</html>
