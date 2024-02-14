@@ -1,0 +1,95 @@
+// 变量
+@width: 100px;
+@height: @width + 10px;
+
+#header {
+  width: @width;
+  height: @height;
+  background-color: aqua;
+}
+
+// 嵌套
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    display: inline-block;
+    margin-right: 5px;
+    a {
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+        color: red;
+      }
+    }
+  }
+}
+
+// 混合（Mixin）
+.border-radius(@radius) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+}
+
+.button {
+  .border-radius(5px);
+}
+
+// 运算
+@base: 30px;
+@padding: @base * 2;
+
+.element {
+  margin: @base + 5px;
+  padding: @padding;
+  background-color: aqua;
+}
+
+// 函数与操作
+@color: #3498db;
+
+.darken-bg(@color, @percent) {
+  background-color: darken(@color, @percent);
+}
+
+.container {
+  .darken-bg(@color, 10%);
+}
+
+// 条件语句
+@width: 100px;
+
+.condiction {
+  width: @width;
+  height: @width;
+
+  & when (@width > 500) {
+    background-color: red;
+  }
+
+  & when (@width <= 500) {
+    background-color: blue;
+  }
+}
+
+// 循环
+.loop(@counter) when (@counter > 0) {
+  .class-@{counter} {
+    width: @counter * 10px;
+  }
+  .loop(@counter - 1);
+}
+
+.loop(5);
+
+// 字符串插值
+@property: color;
+
+.widget {
+  @{property}: #888;
+  background-@{property}: red;
+}
