@@ -1,7 +1,5 @@
 <template>
   <person />
-  <person />
-  <person />
 </template>
 
 <script lang="ts">

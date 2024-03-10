@@ -31,7 +31,8 @@ export default {
     }
 
     // 返回一个对象，对象中的内容，模板中可以直接使用
-    return { name, age, tel, changeName, changeAge, showTel }
+    // return { name, age, tel, changeName, changeAge, showTel }
+    return () => '你好啊！'
   }
 }
 </script>
