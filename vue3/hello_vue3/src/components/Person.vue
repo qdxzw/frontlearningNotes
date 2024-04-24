@@ -1,40 +1,26 @@
 <template>
   <div class="person">
-    姓：<input type="text" v-model="firstName" /> <br />
-    名：<input type="text" v-model="lastName" /> <br />
-    全名：<span>{{ fullName }}</span> <br />
-    <button @click="changeFullName">全名改为：li-si</button>
+    <h1>情况一：监视【ref】定义的【基本类型】数据</h1>
+    <h2>当前求和为：{{ sum }}</h2>
+    <button @click="changeSum">点我sum+1</button>
   </div>
 </template>
 
-<script setup lang="ts" name="App">
-import { ref, computed } from 'vue'
-
-let firstName = ref('zhang')
-let lastName = ref('san')
-
-// 计算属性——只读取，不修改
-/* let fullName = computed(()=>{
-    return firstName.value + '-' + lastName.value
-  }) */
-
-// 计算属性——既读取又修改
-let fullName = computed({
-  // 读取
-  get () {
-    return firstName.value + '-' + lastName.value
-  },
-  // 修改
-  set (val) {
-    console.log('有人修改了fullName', val)
-    firstName.value = val.split('-')[0]
-    lastName.value = val.split('-')[1]
+<script lang="ts" setup name="Person">
+import { ref, watch } from 'vue'
+// 数据
+let sum = ref(0)
+// 方法
+function changeSum () {
+  sum.value += 1
+}
+// 监视，情况一：监视【ref】定义的【基本类型】数据
+const stopWatch = watch(sum, (newValue, oldValue) => {
+  console.log('sum变化了', newValue, oldValue)
+  if (newValue >= 10) {
+    stopWatch()
   }
 })
-
-function changeFullName () {
-  fullName.value = 'li-si'
-}
 </script>
 
 <style>
