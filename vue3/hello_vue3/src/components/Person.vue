@@ -1,35 +1,39 @@
 <template>
   <div class="person">
-    <h2>姓名：{{ person.name }}</h2>
-    <h2>年龄：{{ person.age }}</h2>
-    <h2>性别：{{ person.gender }}</h2>
-    <button @click="changeName">修改名字</button>
-    <button @click="changeAge">修改年龄</button>
-    <button @click="changeGender">修改性别</button>
+    姓：<input type="text" v-model="firstName" /> <br />
+    名：<input type="text" v-model="lastName" /> <br />
+    全名：<span>{{ fullName }}</span> <br />
+    <button @click="changeFullName">全名改为：li-si</button>
   </div>
 </template>
 
-<script lang="ts" setup name="Person">
-import { ref, reactive, toRefs, toRef } from 'vue'
+<script setup lang="ts" name="App">
+import { ref, computed } from 'vue'
 
-// 数据
-let person = reactive({ name: '张三', age: 18, gender: '男' })
+let firstName = ref('zhang')
+let lastName = ref('san')
 
-// 通过toRefs将person对象中的n个属性批量取出，且依然保持响应式的能力
-let { name, gender } = toRefs(person)
+// 计算属性——只读取，不修改
+/* let fullName = computed(()=>{
+    return firstName.value + '-' + lastName.value
+  }) */
 
-// 通过toRef将person对象中的gender属性取出，且依然保持响应式的能力
-let age = toRef(person, 'age')
+// 计算属性——既读取又修改
+let fullName = computed({
+  // 读取
+  get () {
+    return firstName.value + '-' + lastName.value
+  },
+  // 修改
+  set (val) {
+    console.log('有人修改了fullName', val)
+    firstName.value = val.split('-')[0]
+    lastName.value = val.split('-')[1]
+  }
+})
 
-// 方法
-function changeName () {
-  name.value += '~'
-}
-function changeAge () {
-  age.value += 1
-}
-function changeGender () {
-  gender.value = '女'
+function changeFullName () {
+  fullName.value = 'li-si'
 }
 </script>
 
