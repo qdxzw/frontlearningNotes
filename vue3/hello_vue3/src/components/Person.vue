@@ -1,31 +1,35 @@
 <template>
   <div class="person">
-    <h2>汽车信息：一台{{ car.brand }}汽车，价值{{ car.price }}万</h2>
-    <h2>游戏列表：</h2>
-    <ul>
-      <li v-for="g in games" :key="g.id">{{ g.name }}</li>
-    </ul>
-    <button @click="changeCarPrice">修改汽车价格</button>
-    <button @click="changeFirstGame">修改第一游戏</button>
+    <h2>姓名：{{ person.name }}</h2>
+    <h2>年龄：{{ person.age }}</h2>
+    <h2>性别：{{ person.gender }}</h2>
+    <button @click="changeName">修改名字</button>
+    <button @click="changeAge">修改年龄</button>
+    <button @click="changeGender">修改性别</button>
   </div>
 </template>
 
 <script lang="ts" setup name="Person">
-import { ref } from 'vue'
+import { ref, reactive, toRefs, toRef } from 'vue'
 
 // 数据
-let car = ref({ brand: '迈巴赫', price: 200 })
-let games = ref([
-  { id: 'ahsgdyfa01', name: '英雄联盟' },
-  { id: 'ahsgdyfa02', name: '王者荣耀' },
-  { id: 'ahsgdyfa03', name: '原神' }
-])
+let person = reactive({ name: '张三', age: 18, gender: '男' })
 
-function changeCarPrice () {
-  car.value.price += 10
+// 通过toRefs将person对象中的n个属性批量取出，且依然保持响应式的能力
+let { name, gender } = toRefs(person)
+
+// 通过toRef将person对象中的gender属性取出，且依然保持响应式的能力
+let age = toRef(person, 'age')
+
+// 方法
+function changeName () {
+  name.value += '~'
 }
-function changeFirstGame () {
-  games.value[0].name = '流星蝴蝶剑'
+function changeAge () {
+  age.value += 1
+}
+function changeGender () {
+  gender.value = '女'
 }
 </script>
 
