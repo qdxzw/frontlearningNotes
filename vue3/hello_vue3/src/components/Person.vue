@@ -8,19 +8,20 @@
   </div>
 </template>
 <script lang="ts" setup name="Person123">
+import { ref } from 'vue'
 // 数据，原来写在data中（注意：此时的name、age、tel数据都不是响应式数据）
-let name = '张三'
-let age = 18
+let name = ref('张三')
+let age = ref(18)
 let tel = '13888888888'
 
 // 方法，原来写在methods中
 function changeName () {
-  name = 'zhang-san' //注意：此时这么修改name页面是不变化的
-  console.log(name)
+  name.value = 'zhang-san' //注意：此时这么修改name页面是不变化的
+  console.log(name.value)
 }
 function changeAge () {
-  age += 1 //注意：此时这么修改age页面是不变化的
-  console.log(age)
+  age.value += 1 //注意：此时这么修改age页面是不变化的
+  console.log(age.value)
 }
 function showTel () {
   alert(tel)
