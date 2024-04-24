@@ -1,6 +1,6 @@
 <template>
   <div class="person">
-    <h1>情况四：监视【ref】或【reactive】定义的【对象类型】数据中的某个属性</h1>
+    <h1>情况五：监视上述的多个数据</h1>
     <h2>姓名：{{ person.name }}</h2>
     <h2>年龄：{{ person.age }}</h2>
     <h2>汽车：{{ person.car.c1 }}、{{ person.car.c2 }}</h2>
@@ -41,14 +41,9 @@ function changeCar () {
   person.car = { c1: '雅迪', c2: '爱玛' }
 }
 
-// 监视，情况四：监视响应式对象中的某个属性，且该属性是基本类型的，要写成函数式
-/* watch(()=> person.name,(newValue,oldValue)=>{
-    console.log('person.name变化了',newValue,oldValue)
-  }) */
-
-// 监视，情况四：监视响应式对象中的某个属性，且该属性是对象类型的，可以直接写，也能写函数，更推荐写函数
+// 监视，情况五：监视上述的多个数据
 watch(
-  () => person.car,
+  [() => person.name, person.car],
   (newValue, oldValue) => {
     console.log('person.car变化了', newValue, oldValue)
   },
