@@ -1,32 +1,48 @@
 <template>
   <div class="person">
-    <h2>姓名：{{ name }}</h2>
-    <h2>年龄：{{ age }}</h2>
-    <button @click="changeName">修改名字</button>
-    <button @click="changeAge">年龄+1</button>
-    <button @click="showTel">点我查看联系方式</button>
+    <h2>汽车信息：一台{{ car.brand }}汽车，价值{{ car.price }}万</h2>
+    <h2>游戏列表：</h2>
+    <ul>
+      <li v-for="g in games" :key="g.id">{{ g.name }}</li>
+    </ul>
+    <h2>测试：{{ obj.a.b.c.d }}</h2>
+    <button @click="changeCarPrice">修改汽车价格</button>
+    <button @click="changeFirstGame">修改第一游戏</button>
+    <button @click="test">测试</button>
   </div>
 </template>
-<script lang="ts" setup name="Person123">
-import { ref } from 'vue'
-// 数据，原来写在data中（注意：此时的name、age、tel数据都不是响应式数据）
-let name = ref('张三')
-let age = ref(18)
-let tel = '13888888888'
 
-// 方法，原来写在methods中
-function changeName () {
-  name.value = 'zhang-san' //注意：此时这么修改name页面是不变化的
-  console.log(name.value)
+<script lang="ts" setup name="Person">
+import { reactive } from 'vue'
+
+// 数据
+let car = reactive({ brand: '迈巴赫', price: 200 })
+let games = reactive([
+  { id: 'ahsgdyfa01', name: '英雄联盟' },
+  { id: 'ahsgdyfa02', name: '王者荣耀' },
+  { id: 'ahsgdyfa03', name: '原神' }
+])
+let obj = reactive({
+  a: {
+    b: {
+      c: {
+        d: 666
+      }
+    }
+  }
+})
+
+function changeCarPrice () {
+  car.price += 10
 }
-function changeAge () {
-  age.value += 1 //注意：此时这么修改age页面是不变化的
-  console.log(age.value)
+function changeFirstGame () {
+  games[0].name = '流星蝴蝶剑'
 }
-function showTel () {
-  alert(tel)
+function test () {
+  obj.a.b.c.d = 999
 }
 </script>
+
 <style>
 .person {
   background-color: skyblue;
