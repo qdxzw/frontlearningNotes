@@ -1,50 +1,26 @@
 <template>
   <div class="person">
-    <h1>需求：水温达到50℃，或水位达到80cm，则联系服务器</h1>
-    <h2>水温：{{ temp }}</h2>
-    <h2>水位：{{ height }}</h2>
-    <button @click="changePrice">水温+10</button>
-    <button @click="changeSum">水位+10</button>
+    <h1>尚硅谷</h1>
+    <h2 ref="title2">前端</h2>
+    <h3>Vue</h3>
+    <button @click="showLog">点我输出这个元素</button>
   </div>
 </template>
 
+<!-- 子组件Person.vue中要使用defineExpose暴露内容 -->
 <script lang="ts" setup name="Person">
-import { ref, watch, watchEffect } from 'vue'
+import { ref, defineExpose } from 'vue'
 // 数据
-let temp = ref(10)
-let height = ref(10)
-
-// 方法
-function changePrice () {
-  temp.value += 10
+let title2 = ref()
+let name = ref('张三')
+let age = ref(18)
+/****************************/
+/****************************/
+function showLog () {
+  console.log(title2.value)
 }
-function changeSum () {
-  height.value += 10
-}
-
-// 用watch实现，需要明确的指出要监视：temp、height
-// watch([temp, height], value => {
-//   // 从value中获取最新的temp值、height值
-//   const [newTemp, newHeight] = value
-//   // 室温达到50℃，或水位达到20cm，立刻联系服务器
-//   if (newTemp >= 50 || newHeight >= 80) {
-//     console.log('联系服务器')
-//   }
-// })
-
-// 用watchEffect实现
-watchEffect(() => {
-  // 室温达到50℃，或水位达到80cm，立刻联系服务器
-  if (temp.value >= 50 || height.value >= 80) {
-    console.log('联系服务器1')
-  }
-  // if (temp.value >= 50) {
-  //   console.log('联系服务器1')
-  // }
-  // if (height.value >= 80) {
-  //   console.log('联系服务器2')
-  // }
-})
+// 使用defineExpose将组件中的数据交给外部
+defineExpose({ name, age })
 </script>
 
 <style>

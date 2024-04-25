@@ -1,11 +1,18 @@
+<!-- 父组件App.vue -->
 <template>
-  <person />
+  <Person ref="ren" />
+  <button @click="test">测试</button>
 </template>
 
-<script lang="ts">
-import person from './components/Person.vue'
-export default {
-  name: 'App', //组件名
-  components: { person }
+<script lang="ts" setup name="App">
+import Person from './components/Person.vue'
+import { ref } from 'vue'
+
+let ren = ref()
+
+function test () {
+  console.log(ren.value)
+  // console.log(ren.value.name)
+  // console.log(ren.value.age)
 }
 </script>
