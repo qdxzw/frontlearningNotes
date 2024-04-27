@@ -1,29 +1,49 @@
 <template>
   <div class="person">
-    <ul>
-      <li v-for="item in list" :key="item.id">
-        {{ item.name }}--{{ item.age }}
-      </li>
-    </ul>
+    <h2>当前求和为：{{ sum }}</h2>
+    <button @click="changeSum">点我sum+1</button>
   </div>
 </template>
 
+<!-- vue3写法 -->
 <script lang="ts" setup name="Person">
-import { type PersonInter } from '../types'
+import {
+  ref,
+  onBeforeMount,
+  onMounted,
+  onBeforeUpdate,
+  onUpdated,
+  onBeforeUnmount,
+  onUnmounted
+} from 'vue'
 
-// 第一种写法：仅接收
-// const props = defineProps(['list'])
-
-// 第二种写法：接收+限制类型
-// defineProps<{list:Persons}>()
-
-// 第三种写法：接收+限制类型+指定默认值+限制必要性
-let props = withDefaults(defineProps<{ list?: Persons }>(), {
-  list: () => [{ id: 'asdasg01', name: '小猪佩奇', age: 18 }]
+// 数据
+let sum = ref(0)
+// 方法
+function changeSum () {
+  sum.value += 1
+}
+console.log('setup')
+// 生命周期钩子
+onBeforeMount(() => {
+  console.log('挂载之前')
 })
-console.log(props)
+onMounted(() => {
+  console.log('子---挂载完毕')
+})
+onBeforeUpdate(() => {
+  console.log('更新之前')
+})
+onUpdated(() => {
+  console.log('更新完毕')
+})
+onBeforeUnmount(() => {
+  console.log('卸载之前')
+})
+onUnmounted(() => {
+  console.log('卸载完毕')
+})
 </script>
-
 <style>
 .person {
   background-color: skyblue;
