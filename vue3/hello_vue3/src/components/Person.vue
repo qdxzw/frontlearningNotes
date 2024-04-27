@@ -1,26 +1,27 @@
 <template>
   <div class="person">
-    <h1>尚硅谷</h1>
-    <h2 ref="title2">前端</h2>
-    <h3>Vue</h3>
-    <button @click="showLog">点我输出这个元素</button>
+    <ul>
+      <li v-for="item in list" :key="item.id">
+        {{ item.name }}--{{ item.age }}
+      </li>
+    </ul>
   </div>
 </template>
 
-<!-- 子组件Person.vue中要使用defineExpose暴露内容 -->
 <script lang="ts" setup name="Person">
-import { ref, defineExpose } from 'vue'
-// 数据
-let title2 = ref()
-let name = ref('张三')
-let age = ref(18)
-/****************************/
-/****************************/
-function showLog () {
-  console.log(title2.value)
-}
-// 使用defineExpose将组件中的数据交给外部
-defineExpose({ name, age })
+import { type PersonInter } from '../types'
+
+// 第一种写法：仅接收
+// const props = defineProps(['list'])
+
+// 第二种写法：接收+限制类型
+// defineProps<{list:Persons}>()
+
+// 第三种写法：接收+限制类型+指定默认值+限制必要性
+let props = withDefaults(defineProps<{ list?: Persons }>(), {
+  list: () => [{ id: 'asdasg01', name: '小猪佩奇', age: 18 }]
+})
+console.log(props)
 </script>
 
 <style>
