@@ -10,6 +10,7 @@
         }}</RouterLink> -->
 
         <!-- 跳转并携带params参数（to的对象写法） -->
+        <button @click="showNewsDetail(news)">点击查看新闻</button>
         <RouterLink
           :to="{
             name: 'xiang', //用name跳转
@@ -32,12 +33,28 @@
 
 <script lang="ts" setup name="News">
 import { reactive } from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRouter } from 'vue-router'
 let newsList = reactive([
   { id: 'dawd1', title: '1', content: '11' },
   { id: 'dawd2', title: '2', content: '22' },
   { id: 'dawd3', title: '3', content: '33' }
 ])
+const router = useRouter()
+interface NewsInter {
+  id: string
+  title: string
+  content: string
+}
+function showNewsDetail(news: NewsInter) {
+  router.replace({
+    name: 'xiang', //用name跳转
+    params: {
+      id: news.id,
+      title: news.title,
+      content: news.title
+    }
+  })
+}
 </script>
 
 <style scoped>

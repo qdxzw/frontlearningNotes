@@ -3,13 +3,13 @@
     <h2 class="title">Vue路由测试</h2>
     <!-- 导航区 -->
     <div class="navigate">
-      <RouterLink to="/home" active-class="active"
+      <RouterLink replace to="/home" active-class="active"
         ><span>首页</span></RouterLink
       >
-      <RouterLink to="/news" active-class="active"
+      <RouterLink replace to="/news" active-class="active"
         ><span>新闻</span></RouterLink
       >
-      <RouterLink to="/about" active-class="active"
+      <RouterLink replace to="/about" active-class="active"
         ><span>关于</span></RouterLink
       >
     </div>

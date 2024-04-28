@@ -39,6 +39,10 @@ const router = createRouter({
       path: "/about",
       component: About,
     },
+    {
+      path: "/",
+      redirect: "/home",
+    },
   ],
 });
 export default router;
