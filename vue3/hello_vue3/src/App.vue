@@ -1,28 +1,15 @@
 <template>
-  <div class="app"></div>
+  <div class="app">
+    <h2>{{ msg }}</h2>
+    <input type="text" v-model="msg" />
+  </div>
 </template>
 
 <script setup lang="ts" name="App">
-import { reactive, toRaw, markRaw, isReactive } from 'vue'
-
-/* toRaw */
-// 响应式对象
-let person = reactive({ name: 'tony', age: 18 })
-// 原始对象
-let rawPerson = toRaw(person)
-
-/* markRaw */
-let citysd = markRaw([
-  { id: 'asdda01', name: '北京' },
-  { id: 'asdda02', name: '上海' },
-  { id: 'asdda03', name: '天津' },
-  { id: 'asdda04', name: '重庆' }
-])
-// 根据原始对象citys去创建响应式对象citys2 —— 创建失败，因为citys被markRaw标记了
-let citys2 = reactive(citysd)
-console.log(isReactive(person)) //true
-console.log(isReactive(rawPerson)) //false
-console.log(isReactive(citys2)) //false
+import { ref } from 'vue'
+import useMsgRefs from './useMsgRefs'
+// let msg = ref('你好')
+let { msg } = useMsgRefs('你好', 1000)
 </script>
 
 <style scoped>
