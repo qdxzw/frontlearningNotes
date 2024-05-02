@@ -1,7 +1,9 @@
 <template>
   <div class="child">
-    <h2>Child组件</h2>
+    <h2>Child组件{{ x }}</h2>
     <h3>当前求和为：{{ sum }}</h3>
+    <h2 v-beauty="sum">好开心</h2>
+    <global></global>
   </div>
 </template>
 
