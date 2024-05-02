@@ -1,41 +1,28 @@
 <template>
-  <div class="app">
-    <h2>车的品牌：{{ car2.brand }}</h2>
-    <h2>车的配置：{{ car2.options }}</h2>
-    <button @click="changeBrand()">修改品牌</button>
-    <button @click="changeColor()">修改颜色</button>
-    <button @click="changeEngine()">修改引擎</button>
-    <button @click="changeCar()">修改引擎</button>
-  </div>
+  <div class="app"></div>
 </template>
 
 <script setup lang="ts" name="App">
-import { ref, reactive, readonly, shallowReadonly } from 'vue'
+import { reactive, toRaw, markRaw, isReactive } from 'vue'
 
-let car1 = reactive({
-  brand: '迈巴赫',
-  options: {
-    color: '红色',
-    engine: 'v10'
-  }
-})
-let car2 = readonly(car1)
-let car3 = shallowReadonly(car1)
-function changeBrand () {
-  car3.brand = '梅克赛斯'
-}
-function changeColor () {
-  car3.options.color = '白色'
-}
-function changeEngine () {
-  car3.options.engine = 'v12'
-}
-function changeCar () {
-  Object.assign(car3, {
-    brand: '大众',
-    options: { color: '紫色', engine: 'v9' }
-  })
-}
+/* toRaw */
+// 响应式对象
+let person = reactive({ name: 'tony', age: 18 })
+// 原始对象
+let rawPerson = toRaw(person)
+
+/* markRaw */
+let citysd = markRaw([
+  { id: 'asdda01', name: '北京' },
+  { id: 'asdda02', name: '上海' },
+  { id: 'asdda03', name: '天津' },
+  { id: 'asdda04', name: '重庆' }
+])
+// 根据原始对象citys去创建响应式对象citys2 —— 创建失败，因为citys被markRaw标记了
+let citys2 = reactive(citysd)
+console.log(isReactive(person)) //true
+console.log(isReactive(rawPerson)) //false
+console.log(isReactive(citys2)) //false
 </script>
 
 <style scoped>
