@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>04块级元素垂直居中</title>
+    <style>
+      .flex {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
+      .father1 {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        background-color: aqua;
+      }
+      /* 第一种情况*/
+      .son1 {
+        width: 200px;
+        height: 200px;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: yellow;
+      }
+      /* 第二种情况*/
+      .son2 {
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        background: yellow;
+        left: 50%;
+        top: 50%;
+        margin-left: -100px;
+        margin-top: -100px;
+      }
+      /* 第三种情况*/
+      .son3 {
+        position: absolute;
+        background: yellow;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      /* 第四种情况*/
+      .father2 {
+        display: table-cell;
+        width: 300px;
+        height: 300px;
+        vertical-align: middle;
+        text-align: center;
+        background-color: aqua;
+      }
+      .son4 {
+        display: inline-block;
+        width: 200px;
+        height: 200px;
+        background: yellow;
+      }
+      /* 第五种情况*/
+      .father3 {
+        display: flex;
+        width: 300px;
+        height: 300px;
+        justify-content: center;
+        align-items: center;
+        background-color: aqua;
+      }
+      .son5 {
+        width: 200px;
+        height: 200px;
+        background-color: yellow;
+      }
+      /* 第六种情况*/
+      .father4 {
+        display: flex;
+        width: 300px;
+        height: 300px;
+        justify-content: center;
+        align-items: center;
+        background-color: aqua;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex">
+      <div class="father1">
+        第一种情况 子元素有固定宽高（利用定位+margin:auto）
+        <div class="son1"></div>
+      </div>
+      <div class="father1">
+        第二种情况 子元素有固定宽高（利用定位+margin:负值）
+        <div class="son2"></div>
+      </div>
+      <div class="father1">
+        第三种情况 子元素没有固定宽高（利用定位+transform）
+        <div class="son3">123</div>
+      </div>
+      <div class="father2">
+        第四种情况
+        子元素不限宽高（利用table布局），注意如果父级的父级是弹性布局会受到影响，垂直居中可能不生效
+        <div class="son4"></div>
+      </div>
+      <div class="father3">
+        第五种情况 子元素不限宽高（利用flex布局）
+        <div class="son5">123</div>
+      </div>
+      <div class="father4">
+        第六种情况 子元素不限宽高（利用grid布局）
+        <div class="son5">123</div>
+      </div>
+    </div>
+  </body>
+</html>
