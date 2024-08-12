@@ -1,0 +1,48 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/cate/cate",
+    "pages/cart/cart",
+    "pages/profile/profile",
+    "pages/list/list"
+  ],
+  "window": {
+    "navigationBarTitleText": "慕尚花坊",
+    "navigationBarBackgroundColor":"#f3514f",
+    "enablePullDownRefresh":true,
+    "backgroundColor":"#efefef",
+    "backgroundTextStyle":"dark"
+  },
+  "tabBar":{
+    "selectedColor":"#f3514f",
+    "color":"#666",
+    "borderStyle":"white",
+    "list":[
+     { "pagePath":"pages/index/index",
+      "text":"首页",
+      "iconPath":"assets/tabbar/index.png",
+      "selectedIconPath":"assets/tabbar/index-active.png"},
+      {
+      "pagePath":"pages/cate/cate",
+      "text":"分类",
+      "iconPath":"assets/tabbar/cate.png",
+      "selectedIconPath":"assets/tabbar/cate-active.png"
+      },
+      {
+        "pagePath":"pages/cart/cart",
+        "text":"购物车",
+        "iconPath":"assets/tabbar/cart.png",
+        "selectedIconPath":"assets/tabbar/cart-active.png"
+        },
+        {
+          "pagePath":"pages/profile/profile",
+          "text":"我的",
+          "iconPath":"assets/tabbar/my.png",
+          "selectedIconPath":"assets/tabbar/my-active.png"
+          }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}
