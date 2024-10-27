@@ -1,7 +1,14 @@
-<!--index.wxml-->
-<navigation-bar title="Weixin" back="{{false}}" color="black" background="#FFF"></navigation-bar>
-<scroll-view class="scrollarea" scroll-y type="list">
-  <view class="container">
-    Weixinww
-  </view>
-</scroll-view>
+<!-- 轮播区域 -->
+<view class="swiper">
+  <swiper indicator-dots="true">
+    <swiper-item>
+      <image src="../../assets/banner/banner-1.jpg" mode=""/>
+    </swiper-item>
+    <swiper-item>
+      <image src="../../assets/banner/banner-2.jpg" mode=""/>
+    </swiper-item>
+    <swiper-item>
+      <image src="../../assets/banner/banner-3.jpg" mode=""/>
+    </swiper-item>
+  </swiper>
+</view>

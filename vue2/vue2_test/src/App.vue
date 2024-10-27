@@ -1,14 +1,19 @@
 <template>
-  <div id="app"><Person v-if="isshow" /></div>
+  <div id="app">
+    <!-- <Person v-if="isshow" /> -->
+    <CountComponent></CountComponent>
+  </div>
 </template>
 
 <script>
 import Person from './components/Person.vue'
+import CountComponent from './components/CountComponent.vue'
 
 export default {
   name: 'App',
   components: {
-    Person
+    Person,
+    CountComponent
   },
   data () {
     return {
